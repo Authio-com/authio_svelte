@@ -1,6 +1,6 @@
 {
   "name": "@useauthio/svelte",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Authio Svelte / SvelteKit SDK — server-side session verification + Svelte stores for multi-org auth.",
   "author": "Authio",
   "license": "MIT",
@@ -46,7 +46,7 @@
     }
   },
   "dependencies": {
-    "@useauthio/node": "file:./vendor/authio-node"
+    "@useauthio/node": "^0.2.0"
   },
   "devDependencies": {
     "svelte": "^5.0.0",

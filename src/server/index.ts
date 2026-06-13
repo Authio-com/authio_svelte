@@ -26,6 +26,7 @@ const RESERVED_JWT_CLAIMS = new Set([
   "impersonator_user_id",
   "impersonator_email",
   "imp_grant_id",
+  "flags",
 ]);
 
 const verifierCache = new Map<string, JwtVerifier>();
@@ -83,6 +84,7 @@ export async function verifySessionCookie(
         ? new Date(claims.exp * 1000).toISOString()
         : new Date().toISOString(),
       claims: merged,
+      flags: Array.isArray(claims.flags) ? claims.flags : [],
       isImpersonation:
         claims.is_impersonation === true ? true : undefined,
       impersonatorEmail:
