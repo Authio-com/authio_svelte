@@ -46,8 +46,8 @@ export const handle: Handle = async ({ event, resolve }) => {
   async function submit() {
     await signIn({
       email,
-      publishableKey: import.meta.env.PUBLIC_AUTHIO_PUBLISHABLE_KEY,
-      redirectUrl: `${location.origin}/api/auth/callback`,
+      projectId: import.meta.env.PUBLIC_AUTHIO_PROJECT_ID,
+      redirectUri: `${location.origin}/api/auth/callback`,
     });
   }
 </script>
@@ -69,8 +69,9 @@ export const handle: Handle = async ({ event, resolve }) => {
 - `authio: Writable<AuthioState>` — default writable store.
 - `setSession(session)` — populate the store after the server load.
 - `clearSession()` — wipe the store after sign-out.
-- `signIn({ email, publishableKey, redirectUrl, apiUrl? })` — POST to
-  `/v1/auth/magic-link/start`.
+- `signIn({ email, projectId, redirectUri, apiUrl? })` — POST to
+  `/v1/auth/magic-link/send` with the `X-Authio-Project` header and body
+  `{ destination, redirect_uri }`.
 
 ### Server (`@useauthio/svelte/server`)
 

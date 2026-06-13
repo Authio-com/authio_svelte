@@ -4,6 +4,21 @@ All notable changes to `@useauthio/svelte` are documented here. This
 project adheres to [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.2] — 2026-06-13
+
+### Fixed
+- **Magic-link sign-in now matches auth-core.** `signIn` was wrong on all
+  four wire details: it posted to `/v1/auth/magic-link/start` (now `/send`),
+  with body `{ email, redirect_url }` (now `{ destination, redirect_uri }`),
+  and authenticated with the `x-publishable-key` header (now
+  `X-Authio-Project`). Real sends were rejected; they now succeed.
+
+### Changed
+- **`signIn` options aligned with `@useauthio/react` / `@useauthio/vue`.**
+  `publishableKey` → `projectId` and `redirectUrl` → `redirectUri`. The
+  default `apiUrl` is now the canonical identity origin
+  (`https://identity.authio.com`) instead of the management-API host.
+
 ## [0.2.1] — 2026-06-13
 
 ### Fixed

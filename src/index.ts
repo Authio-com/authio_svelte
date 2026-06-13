@@ -28,28 +28,42 @@ export function clearSession(): void {
 }
 
 export interface SignInOptions {
+  /** Email address (or E.164 phone) to send the magic-link to. */
   email: string;
+  /** auth-core base URL. Defaults to the canonical identity origin. */
   apiUrl?: string;
-  publishableKey: string;
-  redirectUrl: string;
+  /**
+   * Project ID (`proj_…`). Sent as the `X-Authio-Project` header — the
+   * canonical project resolver for auth-core (NOT `x-publishable-key`).
+   * Aligned with `@useauthio/react` / `@useauthio/vue`.
+   */
+  projectId: string;
+  /**
+   * URL the magic-link click-through lands on. Sent as `redirect_uri`.
+   * Aligned with `@useauthio/react` / `@useauthio/vue`.
+   */
+  redirectUri: string;
 }
 
 /**
  * Browser-side helper: kicks off the Authio magic-link flow.
  * Returns when auth-core has accepted the request; the user receives an
- * email whose link routes back through your `redirectUrl`.
+ * email whose link routes back through your `redirectUri`.
+ *
+ * Wire contract (auth-core magiclink.go): `POST /v1/auth/magic-link/send`,
+ * header `X-Authio-Project`, body `{ destination, redirect_uri }`.
  */
 export async function signIn(opts: SignInOptions): Promise<void> {
-  const apiUrl = (opts.apiUrl ?? "https://api.authio.com").replace(/\/$/, "");
-  const res = await fetch(`${apiUrl}/v1/auth/magic-link/start`, {
+  const apiUrl = (opts.apiUrl ?? "https://identity.authio.com").replace(/\/$/, "");
+  const res = await fetch(`${apiUrl}/v1/auth/magic-link/send`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
-      "x-publishable-key": opts.publishableKey,
+      "X-Authio-Project": opts.projectId,
     },
     body: JSON.stringify({
-      email: opts.email,
-      redirect_url: opts.redirectUrl,
+      destination: opts.email,
+      redirect_uri: opts.redirectUri,
     }),
   });
   if (!res.ok) {
