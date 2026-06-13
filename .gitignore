@@ -1,0 +1,10 @@
+node_modules/
+dist/
+# Vendored @authio/node dist is committed for file:./vendor/authio-node CI.
+!vendor/authio-node/dist/
+.svelte-kit/
+*.log
+.DS_Store
+.idea/
+.vscode/
+coverage/
