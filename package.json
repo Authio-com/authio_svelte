@@ -6,7 +6,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/authio-com/authio_svelte.git"
+    "url": "https://github.com/Authio-com/authio_svelte.git"
   },
   "homepage": "https://authio.com",
   "type": "module",
