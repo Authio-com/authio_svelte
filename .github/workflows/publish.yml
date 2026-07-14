@@ -59,7 +59,7 @@ jobs:
   live-conformance:
     needs: build
     if: needs.build.result == 'success'
-    uses: authio-com/authio_e2e-tests/.github/workflows/conformance-browser-sdks.yml@main
+    uses: authio-com/authio_e2e-tests/.github/workflows/conformance-browser-sdks.yml@b55eb99ca460eee35f67c128647bfefbe21a8da4
     secrets: inherit
 
   npm-publish:
