@@ -1,7 +1,7 @@
 {
   "name": "@useauthio/svelte",
   "version": "0.2.2",
-  "description": "Authio Svelte / SvelteKit SDK — server-side session verification + Svelte stores for multi-org auth.",
+  "description": "Authio Svelte / SvelteKit SDK \u2014 server-side session verification + Svelte stores for multi-org auth.",
   "author": "Authio",
   "license": "MIT",
   "repository": {
@@ -61,7 +61,8 @@
   },
   "pnpm": {
     "overrides": {
-      "esbuild": ">=0.28.1"
+      "esbuild": ">=0.28.1",
+      "postcss": "^8.5.23"
     }
   }
 }
