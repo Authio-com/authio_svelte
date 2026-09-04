@@ -43,6 +43,8 @@ export interface SignInOptions {
    * Aligned with `@useauthio/react` / `@useauthio/vue`.
    */
   redirectUri: string;
+  /** Opaque, consent-gated proof minted by @useauthio/xray. */
+  xrayVisitorProof?: string;
 }
 
 /**
@@ -64,6 +66,9 @@ export async function signIn(opts: SignInOptions): Promise<void> {
     body: JSON.stringify({
       destination: opts.email,
       redirect_uri: opts.redirectUri,
+      ...(opts.xrayVisitorProof
+        ? { xray_visitor_proof: opts.xrayVisitorProof }
+        : {}),
     }),
   });
   if (!res.ok) {
